@@ -1,0 +1,47 @@
+<html>
+<head>
+<style>
+	/* image_view2를 마스킹 할때 쓴다. */
+	#qr_view {
+		width:150px;
+		height:150px;
+		margin:0px;
+		border:3px solid red;
+		position:relative;
+		/* hidden 옵션이 없을 경우 image_view2에 로드된 이미지가 나열된다. 
+		   한개의 이미지만 표시되고 나머지는 숨기기 위해 아래 옵션을 사용 */
+	}
+
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+	var serverSide	= "http://chart.apis.google.com/chart?cht=qr&chs=150x150&chId=L0&chl=http://";
+
+	window.onload = function() {
+		$("#txt_url").keyup(function () {
+			startLoadFile();
+		});
+	}
+	
+	function startLoadFile() {
+		msg = serverSide + $("#txt_url").val();
+		if ($("#qr_view").size()) {
+			$("#qr_view > img").remove()
+		}
+		var img = document.createElement("img");
+		img.src = msg;
+		img.id = "img_01";
+		
+		$("#qr_view").append(img);
+	}
+
+</script>
+</head>
+<body>
+	<input type="text" id="txt_url">
+	<div id="qr_view">
+		
+	</div>
+</body>
+</html>
